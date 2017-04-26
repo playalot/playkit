@@ -33,12 +33,6 @@
 		6ABE96501EB09F7F005961C5 /* ImagePickerTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE963F1EB09F7F005961C5 /* ImagePickerTitleView.swift */; };
 		6ABE96511EB09F7F005961C5 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE96401EB09F7F005961C5 /* NavigationBar.swift */; };
 		6ABE96521EB09F7F005961C5 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE96411EB09F7F005961C5 /* PhotoCollectionViewCell.swift */; };
-		6ABE96571EB09FFF005961C5 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE96541EB09FFF005961C5 /* Alamofire.framework */; };
-		6ABE96581EB09FFF005961C5 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE96551EB09FFF005961C5 /* ObjectMapper.framework */; };
-		6ABE96591EB09FFF005961C5 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE96561EB09FFF005961C5 /* RxSwift.framework */; };
-		6ABE965B1EB0A056005961C5 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE965A1EB0A056005961C5 /* RxCocoa.framework */; };
-		6ABE965E1EB0A062005961C5 /* KeychainAccess.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE965C1EB0A062005961C5 /* KeychainAccess.framework */; };
-		6ABE965F1EB0A062005961C5 /* YYCache.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6ABE965D1EB0A062005961C5 /* YYCache.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -96,10 +90,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABE965B1EB0A056005961C5 /* RxCocoa.framework in Frameworks */,
-				6ABE96571EB09FFF005961C5 /* Alamofire.framework in Frameworks */,
-				6ABE96581EB09FFF005961C5 /* ObjectMapper.framework in Frameworks */,
-				6ABE96591EB09FFF005961C5 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,8 +97,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6ABE965E1EB0A062005961C5 /* KeychainAccess.framework in Frameworks */,
-				6ABE965F1EB0A062005961C5 /* YYCache.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
