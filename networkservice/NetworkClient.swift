@@ -19,6 +19,12 @@ public struct NetworkClientConfig {
     func buildURL(version: String, path: String) -> String {
         return "\(schema)\(host)\(version)\(path)"
     }
+    
+    public init(name: String, schema: String, host: String) {
+        self.name = name
+        self.schema = schema
+        self.host = host
+    }
 }
 
 
