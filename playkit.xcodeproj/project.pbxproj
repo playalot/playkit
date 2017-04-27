@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A48C28A1EB1F08100ACE032 /* PKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A48C2891EB1F08100ACE032 /* PKLabel.swift */; };
+		6A48C28C1EB1F11A00ACE032 /* PKTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A48C28B1EB1F11A00ACE032 /* PKTextView.swift */; };
 		6ABE95F61EB09EF0005961C5 /* playkit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABE95F41EB09EF0005961C5 /* playkit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ABE96051EB09F35005961C5 /* networkservice.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABE96031EB09F35005961C5 /* networkservice.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6ABE960D1EB09F41005961C5 /* DownloadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ABE96091EB09F41005961C5 /* DownloadClient.swift */; };
@@ -36,6 +38,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A48C2891EB1F08100ACE032 /* PKLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKLabel.swift; sourceTree = "<group>"; };
+		6A48C28B1EB1F11A00ACE032 /* PKTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKTextView.swift; sourceTree = "<group>"; };
 		6ABE95F11EB09EF0005961C5 /* playkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = playkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABE95F41EB09EF0005961C5 /* playkit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = playkit.h; sourceTree = "<group>"; };
 		6ABE95F51EB09EF0005961C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -110,6 +114,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6A48C2871EB1F06300ACE032 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Const;
+			sourceTree = "<group>";
+		};
+		6A48C2881EB1F06300ACE032 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				6A48C2891EB1F08100ACE032 /* PKLabel.swift */,
+				6A48C28B1EB1F11A00ACE032 /* PKTextView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		6ABE95E71EB09EF0005961C5 = {
 			isa = PBXGroup;
 			children = (
@@ -136,6 +156,8 @@
 		6ABE95F31EB09EF0005961C5 /* playkit */ = {
 			isa = PBXGroup;
 			children = (
+				6A48C2871EB1F06300ACE032 /* Const */,
+				6A48C2881EB1F06300ACE032 /* UI */,
 				6ABE95F41EB09EF0005961C5 /* playkit.h */,
 				6ABE95F51EB09EF0005961C5 /* Info.plist */,
 			);
@@ -358,6 +380,7 @@
 					6ABE95F01EB09EF0005961C5 = {
 						CreatedOnToolsVersion = 8.3.1;
 						DevelopmentTeam = 858CBVXSWP;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					6ABE96001EB09F35005961C5 = {
@@ -437,6 +460,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A48C28C1EB1F11A00ACE032 /* PKTextView.swift in Sources */,
+				6A48C28A1EB1F08100ACE032 /* PKLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +614,7 @@
 		6ABE95FA1EB09EF0005961C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 858CBVXSWP;
@@ -601,6 +627,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.play.playkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -608,6 +635,7 @@
 		6ABE95FB1EB09EF0005961C5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 858CBVXSWP;
