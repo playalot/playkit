@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A080ABD1EB84BB700A89A28 /* HTTPStatusCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A080ABB1EB848FE00A89A28 /* HTTPStatusCode.swift */; };
 		6A48C28A1EB1F08100ACE032 /* PKLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A48C2891EB1F08100ACE032 /* PKLabel.swift */; };
 		6A48C28C1EB1F11A00ACE032 /* PKTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A48C28B1EB1F11A00ACE032 /* PKTextView.swift */; };
 		6ABE95F61EB09EF0005961C5 /* playkit.h in Headers */ = {isa = PBXBuildFile; fileRef = 6ABE95F41EB09EF0005961C5 /* playkit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -38,6 +39,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6A080ABB1EB848FE00A89A28 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6A48C2891EB1F08100ACE032 /* PKLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKLabel.swift; sourceTree = "<group>"; };
 		6A48C28B1EB1F11A00ACE032 /* PKTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKTextView.swift; sourceTree = "<group>"; };
 		6ABE95F11EB09EF0005961C5 /* playkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = playkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -173,6 +175,7 @@
 				6ABE960A1EB09F41005961C5 /* NetworkClient.swift */,
 				6ABE960B1EB09F41005961C5 /* RequestEntity.swift */,
 				6ABE960C1EB09F41005961C5 /* RxAlamofire.swift */,
+				6A080ABB1EB848FE00A89A28 /* HTTPStatusCode.swift */,
 			);
 			path = networkservice;
 			sourceTree = "<group>";
@@ -469,6 +472,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A080ABD1EB84BB700A89A28 /* HTTPStatusCode.swift in Sources */,
 				6ABE960D1EB09F41005961C5 /* DownloadClient.swift in Sources */,
 				6ABE960F1EB09F41005961C5 /* RequestEntity.swift in Sources */,
 				6ABE96101EB09F41005961C5 /* RxAlamofire.swift in Sources */,

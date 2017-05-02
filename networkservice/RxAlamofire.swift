@@ -525,7 +525,13 @@ extension Reactive where Base: DataRequest {
                             }
                             observer.on(.completed)
                         case .failure(let error):
-                            observer.on(.error(error as Error))
+                            if let code = packedResponse.response?.statusCode,
+                               let statusCode = HTTPStatusCode(rawValue: code),
+                                !statusCode.isSuccess  {
+                                observer.on(.error(NSBuildError(code: code, message: statusCode.localizedReasonPhrase)))
+                            } else {
+                                observer.on(.error(error as Error))
+                            }
                         }
                 }
                 return Disposables.create {
@@ -551,7 +557,13 @@ extension Reactive where Base: DataRequest {
                             }
                             observer.on(.completed)
                         case .failure(let error):
-                            observer.on(.error(error as Error))
+                            if let code = packedResponse.response?.statusCode,
+                                let statusCode = HTTPStatusCode(rawValue: code),
+                                !statusCode.isSuccess  {
+                                observer.on(.error(NSBuildError(code: code, message: statusCode.localizedReasonPhrase)))
+                            } else {
+                                observer.on(.error(error as Error))
+                            }
                         }
                 }
                 return Disposables.create {

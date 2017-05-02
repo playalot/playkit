@@ -204,8 +204,7 @@ public class NetworkClient<Base: HTTPResponseModel> {
             }
             .flatMap { (response: HTTPURLResponse, json: Any) -> Observable<Any> in
                 guard let model = Mapper<Base>().map(JSONObject: json) else {
-                    return Observable.error(NSBuildError(code: ClientError.dataNotFound,
-                                                         message: "Data not found"))
+                    return Observable.error(NSBuildError(code: ClientError.dataNotFound, message: "Data not found"))
                 }
                 if model.isSuccess {
                     return Observable.just(json)
