@@ -17,10 +17,10 @@ import RxCocoa
 extension Reactive where Base: URLSession {
     
     func json(_ method: Alamofire.HTTPMethod,
-                     _ url: URLConvertible,
-                     parameters: [String: Any]? = nil,
-                     encoding: ParameterEncoding = URLEncoding.default,
-                     headers: [String: String]? = nil) -> Observable<Any> {
+              _ url: URLConvertible,
+              parameters: [String: Any]? = nil,
+              encoding: ParameterEncoding = URLEncoding.default,
+              headers: [String: String]? = nil) -> Observable<Any> {
         do {
             let request = try RxAlamofire.urlRequest(
                 method,
@@ -35,10 +35,10 @@ extension Reactive where Base: URLSession {
     }
     
     func response(method: Alamofire.HTTPMethod,
-                         _ url: URLConvertible,
-                         parameters: [String: Any]? = nil,
-                         encoding: ParameterEncoding = URLEncoding.default,
-                         headers: [String: String]? = nil) -> Observable<(HTTPURLResponse, Data)> {
+                  _ url: URLConvertible,
+                  parameters: [String: Any]? = nil,
+                  encoding: ParameterEncoding = URLEncoding.default,
+                  headers: [String: String]? = nil) -> Observable<(HTTPURLResponse, Data)> {
         do {
             let request = try RxAlamofire.urlRequest(method,
                                                      url,
@@ -52,10 +52,10 @@ extension Reactive where Base: URLSession {
     }
     
     func data(_ method: Alamofire.HTTPMethod,
-                     _ url: URLConvertible,
-                     parameters: [String: AnyObject]? = nil,
-                     encoding: ParameterEncoding = URLEncoding.default,
-                     headers: [String: String]? = nil) -> Observable<Data> {
+              _ url: URLConvertible,
+              parameters: [String: AnyObject]? = nil,
+              encoding: ParameterEncoding = URLEncoding.default,
+              headers: [String: String]? = nil) -> Observable<Data> {
         do {
             let request = try RxAlamofire.urlRequest(method,
                                                      url,
@@ -75,10 +75,10 @@ struct RxAlamofire {
     // MARK: Convenience functions
     
     static func urlRequest(_ method: Alamofire.HTTPMethod,
-                                  _ url: URLConvertible,
-                                  parameters: [String: Any]? = nil,
-                                  encoding: ParameterEncoding = URLEncoding.default,
-                                  headers: [String: String]? = nil)
+                           _ url: URLConvertible,
+                           parameters: [String: Any]? = nil,
+                           encoding: ParameterEncoding = URLEncoding.default,
+                           headers: [String: String]? = nil)
         throws -> Foundation.URLRequest {
             var mutableURLRequest = Foundation.URLRequest(url: try url.asURL())
             mutableURLRequest.httpMethod = method.rawValue
@@ -99,10 +99,10 @@ struct RxAlamofire {
     // MARK: Request
     
     static func request(_ method: Alamofire.HTTPMethod,
-                               _ url: URLConvertible,
-                               parameters: [String: Any]? = nil,
-                               encoding: ParameterEncoding = URLEncoding.default,
-                               headers: [String: String]? = nil)
+                        _ url: URLConvertible,
+                        parameters: [String: Any]? = nil,
+                        encoding: ParameterEncoding = URLEncoding.default,
+                        headers: [String: String]? = nil)
         -> Observable<DataRequest> {
             return Alamofire.SessionManager.default.rx.request(
                 method,
@@ -116,10 +116,10 @@ struct RxAlamofire {
     // MARK: data
     
     static func requestData(_ method: Alamofire.HTTPMethod,
-                                   _ url: URLConvertible,
-                                   parameters: [String: Any]? = nil,
-                                   encoding: ParameterEncoding = URLEncoding.default,
-                                   headers: [String: String]? = nil)
+                            _ url: URLConvertible,
+                            parameters: [String: Any]? = nil,
+                            encoding: ParameterEncoding = URLEncoding.default,
+                            headers: [String: String]? = nil)
         -> Observable<(HTTPURLResponse, Data)> {
             return Alamofire.SessionManager.default.rx.responseData(
                 method,
@@ -131,10 +131,10 @@ struct RxAlamofire {
     }
     
     static func data(_ method: Alamofire.HTTPMethod,
-                            _ url: URLConvertible,
-                            parameters: [String: Any]? = nil,
-                            encoding: ParameterEncoding = URLEncoding.default,
-                            headers: [String: String]? = nil)
+                     _ url: URLConvertible,
+                     parameters: [String: Any]? = nil,
+                     encoding: ParameterEncoding = URLEncoding.default,
+                     headers: [String: String]? = nil)
         -> Observable<Data> {
             return Alamofire.SessionManager.default.rx.data(
                 method,
@@ -148,10 +148,10 @@ struct RxAlamofire {
     // MARK: string
     
     static func requestString(_ method: Alamofire.HTTPMethod,
-                                     _ url: URLConvertible,
-                                     parameters: [String: Any]? = nil,
-                                     encoding: ParameterEncoding = URLEncoding.default,
-                                     headers: [String: String]? = nil)
+                              _ url: URLConvertible,
+                              parameters: [String: Any]? = nil,
+                              encoding: ParameterEncoding = URLEncoding.default,
+                              headers: [String: String]? = nil)
         -> Observable<(HTTPURLResponse, String)> {
             return Alamofire.SessionManager.default.rx.responseString(
                 method,
@@ -164,10 +164,10 @@ struct RxAlamofire {
     
     
     static func string(_ method: Alamofire.HTTPMethod,
-                              _ url: URLConvertible,
-                              parameters: [String: Any]? = nil,
-                              encoding: ParameterEncoding = URLEncoding.default,
-                              headers: [String: String]? = nil)
+                       _ url: URLConvertible,
+                       parameters: [String: Any]? = nil,
+                       encoding: ParameterEncoding = URLEncoding.default,
+                       headers: [String: String]? = nil)
         -> Observable<String> {
             return Alamofire.SessionManager.default.rx.string(
                 method,
@@ -181,10 +181,10 @@ struct RxAlamofire {
     // MARK: JSON
     
     static func requestJSON(_ method: Alamofire.HTTPMethod,
-                                   _ url: URLConvertible,
-                                   parameters: [String: Any]? = nil,
-                                   encoding: ParameterEncoding = URLEncoding.default,
-                                   headers: [String: String]? = nil)
+                            _ url: URLConvertible,
+                            parameters: [String: Any]? = nil,
+                            encoding: ParameterEncoding = URLEncoding.default,
+                            headers: [String: String]? = nil)
         -> Observable<(HTTPURLResponse, Any)> {
             return Alamofire.SessionManager.default.rx.responseJSON(
                 method,
@@ -196,10 +196,10 @@ struct RxAlamofire {
     }
     
     static func json(_ method: Alamofire.HTTPMethod,
-                            _ url: URLConvertible,
-                            parameters: [String: Any]? = nil,
-                            encoding: ParameterEncoding = URLEncoding.default,
-                            headers: [String: String]? = nil)
+                     _ url: URLConvertible,
+                     parameters: [String: Any]? = nil,
+                     encoding: ParameterEncoding = URLEncoding.default,
+                     headers: [String: String]? = nil)
         -> Observable<Any> {
             return Alamofire.SessionManager.default.rx.json(
                 method,
@@ -228,14 +228,14 @@ struct RxAlamofire {
     // MARK: Download
     
     static func download(_ urlRequest: URLRequestConvertible,
-                                to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
+                         to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
         return Alamofire.SessionManager.default.rx.download(urlRequest, to: destination)
     }
     
     // MARK: Resume Data
     
     static func download(resumeData: Data,
-                                to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
+                         to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
         return Alamofire.SessionManager.default.rx.download(resumeData: resumeData, to: destination)
     }
     
@@ -316,10 +316,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     }
     
     func request(_ method: Alamofire.HTTPMethod,
-                        _ url: URLConvertible,
-                        parameters: [String: Any]? = nil,
-                        encoding: ParameterEncoding = URLEncoding.default,
-                        headers: [String: String]? = nil
+                 _ url: URLConvertible,
+                 parameters: [String: Any]? = nil,
+                 encoding: ParameterEncoding = URLEncoding.default,
+                 headers: [String: String]? = nil
         )
         -> Observable<DataRequest> {
             return request { manager in
@@ -342,10 +342,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     // MARK: data
     
     func responseData(_ method: Alamofire.HTTPMethod,
-                             _ url: URLConvertible,
-                             parameters: [String: Any]? = nil,
-                             encoding: ParameterEncoding = URLEncoding.default,
-                             headers: [String: String]? = nil
+                      _ url: URLConvertible,
+                      parameters: [String: Any]? = nil,
+                      encoding: ParameterEncoding = URLEncoding.default,
+                      headers: [String: String]? = nil
         )
         -> Observable<(HTTPURLResponse, Data)> {
             return request(
@@ -360,10 +360,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     }
     
     func data(_ method: Alamofire.HTTPMethod,
-                     _ url: URLConvertible,
-                     parameters: [String: Any]? = nil,
-                     encoding: ParameterEncoding = URLEncoding.default,
-                     headers: [String: String]? = nil
+              _ url: URLConvertible,
+              parameters: [String: Any]? = nil,
+              encoding: ParameterEncoding = URLEncoding.default,
+              headers: [String: String]? = nil
         )
         -> Observable<Data> {
             return request(
@@ -380,10 +380,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     // MARK: string
     
     func responseString(_ method: Alamofire.HTTPMethod,
-                               _ url: URLConvertible,
-                               parameters: [String: Any]? = nil,
-                               encoding: ParameterEncoding = URLEncoding.default,
-                               headers: [String: String]? = nil
+                        _ url: URLConvertible,
+                        parameters: [String: Any]? = nil,
+                        encoding: ParameterEncoding = URLEncoding.default,
+                        headers: [String: String]? = nil
         )
         -> Observable<(HTTPURLResponse, String)> {
             return request(
@@ -398,10 +398,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     }
     
     func string(_ method: Alamofire.HTTPMethod,
-                       _ url: URLConvertible,
-                       parameters: [String: Any]? = nil,
-                       encoding: ParameterEncoding = URLEncoding.default,
-                       headers: [String: String]? = nil
+                _ url: URLConvertible,
+                parameters: [String: Any]? = nil,
+                encoding: ParameterEncoding = URLEncoding.default,
+                headers: [String: String]? = nil
         )
         -> Observable<String> {
             return request(
@@ -419,10 +419,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     // MARK: JSON
     
     func responseJSON(_ method: Alamofire.HTTPMethod,
-                             _ url: URLConvertible,
-                             parameters: [String: Any]? = nil,
-                             encoding: ParameterEncoding = URLEncoding.default,
-                             headers: [String: String]? = nil
+                      _ url: URLConvertible,
+                      parameters: [String: Any]? = nil,
+                      encoding: ParameterEncoding = URLEncoding.default,
+                      headers: [String: String]? = nil
         )
         -> Observable<(HTTPURLResponse, Any)> {
             return request(method,
@@ -437,10 +437,10 @@ extension Reactive where Base: Alamofire.SessionManager {
     
     
     func json(_ method: Alamofire.HTTPMethod,
-                     _ url: URLConvertible,
-                     parameters: [String: Any]? = nil,
-                     encoding: ParameterEncoding = URLEncoding.default,
-                     headers: [String: String]? = nil
+              _ url: URLConvertible,
+              parameters: [String: Any]? = nil,
+              encoding: ParameterEncoding = URLEncoding.default,
+              headers: [String: String]? = nil
         )
         -> Observable<Any> {
             return request(
@@ -471,7 +471,7 @@ extension Reactive where Base: Alamofire.SessionManager {
     }
     
     func upload(_ stream: InputStream,
-                       urlRequest: URLRequestConvertible) -> Observable<UploadRequest> {
+                urlRequest: URLRequestConvertible) -> Observable<UploadRequest> {
         return request { manager in
             return manager.upload(stream, with: urlRequest)
         }
@@ -480,7 +480,7 @@ extension Reactive where Base: Alamofire.SessionManager {
     // MARK: Download
     
     func download(_ urlRequest: URLRequestConvertible,
-                         to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
+                  to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
         return request { manager in
             return manager.download(urlRequest, to: destination)
         }
@@ -488,7 +488,7 @@ extension Reactive where Base: Alamofire.SessionManager {
     
     
     func download(resumeData: Data,
-                         to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
+                  to destination: @escaping DownloadRequest.DownloadFileDestination) -> Observable<DownloadRequest> {
         return request { manager in
             return manager.download(resumingWith: resumeData, to: destination)
         }
@@ -511,7 +511,7 @@ extension Reactive where Base: DataRequest {
     
     
     func responseResult<T:DataResponseSerializerProtocol>(queue: DispatchQueue? = nil,
-                               responseSerializer: T)
+                        responseSerializer: T)
         -> Observable<(HTTPURLResponse, T.SerializedObject)> {
             return Observable.create { observer in
                 let dataRequest = self.base
@@ -526,7 +526,7 @@ extension Reactive where Base: DataRequest {
                             observer.on(.completed)
                         case .failure(let error):
                             if let code = packedResponse.response?.statusCode,
-                               let statusCode = HTTPStatusCode(rawValue: code),
+                                let statusCode = HTTPStatusCode(rawValue: code),
                                 !statusCode.isSuccess  {
                                 observer.on(.error(NSBuildError(code: code, message: statusCode.localizedReasonPhrase)))
                             } else {

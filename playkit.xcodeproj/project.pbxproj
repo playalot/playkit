@@ -42,7 +42,7 @@
 		6A080ABB1EB848FE00A89A28 /* HTTPStatusCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPStatusCode.swift; sourceTree = "<group>"; };
 		6A48C2891EB1F08100ACE032 /* PKLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKLabel.swift; sourceTree = "<group>"; };
 		6A48C28B1EB1F11A00ACE032 /* PKTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PKTextView.swift; sourceTree = "<group>"; };
-		6ABE95F11EB09EF0005961C5 /* playkit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = playkit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6ABE95F11EB09EF0005961C5 /* PlayKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlayKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6ABE95F41EB09EF0005961C5 /* playkit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = playkit.h; sourceTree = "<group>"; };
 		6ABE95F51EB09EF0005961C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6ABE96011EB09F35005961C5 /* NetworkService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -147,7 +147,7 @@
 		6ABE95F21EB09EF0005961C5 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6ABE95F11EB09EF0005961C5 /* playkit.framework */,
+				6ABE95F11EB09EF0005961C5 /* PlayKit.framework */,
 				6ABE96011EB09F35005961C5 /* NetworkService.framework */,
 				6ABE96161EB09F54005961C5 /* CacheService.framework */,
 				6ABE96251EB09F73005961C5 /* ImagePicker.framework */,
@@ -299,9 +299,9 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		6ABE95F01EB09EF0005961C5 /* playkit */ = {
+		6ABE95F01EB09EF0005961C5 /* PlayKit */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6ABE95F91EB09EF0005961C5 /* Build configuration list for PBXNativeTarget "playkit" */;
+			buildConfigurationList = 6ABE95F91EB09EF0005961C5 /* Build configuration list for PBXNativeTarget "PlayKit" */;
 			buildPhases = (
 				6ABE95EC1EB09EF0005961C5 /* Sources */,
 				6ABE95ED1EB09EF0005961C5 /* Frameworks */,
@@ -312,9 +312,9 @@
 			);
 			dependencies = (
 			);
-			name = playkit;
+			name = PlayKit;
 			productName = playkit;
-			productReference = 6ABE95F11EB09EF0005961C5 /* playkit.framework */;
+			productReference = 6ABE95F11EB09EF0005961C5 /* PlayKit.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		6ABE96001EB09F35005961C5 /* NetworkService */ = {
@@ -418,7 +418,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6ABE95F01EB09EF0005961C5 /* playkit */,
+				6ABE95F01EB09EF0005961C5 /* PlayKit */,
 				6ABE96001EB09F35005961C5 /* NetworkService */,
 				6ABE96151EB09F54005961C5 /* CacheService */,
 				6ABE96241EB09F73005961C5 /* ImagePicker */,
@@ -627,6 +627,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = playkit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.play.playkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -648,6 +649,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = playkit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.play.playkit;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -813,7 +815,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6ABE95F91EB09EF0005961C5 /* Build configuration list for PBXNativeTarget "playkit" */ = {
+		6ABE95F91EB09EF0005961C5 /* Build configuration list for PBXNativeTarget "PlayKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6ABE95FA1EB09EF0005961C5 /* Debug */,

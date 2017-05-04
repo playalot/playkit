@@ -14,11 +14,8 @@ import RxSwift
 
 public struct NetworkClientConfig {
     public let name: String
-    public let schema: String
+    public var schema: String
     public let host: String
-    func buildURL(version: String, path: String) -> String {
-        return "\(schema)\(host)\(version)\(path)"
-    }
     
     public init(name: String, schema: String, host: String) {
         self.name = name
@@ -29,7 +26,7 @@ public struct NetworkClientConfig {
 
 
 
-public protocol RequestManager {
+public protocol RequestManager: class {
     func configure(request: URLRequest) -> URLRequest
     func errorHandle(request: URLRequest, error: Error?)
 }
@@ -48,8 +45,8 @@ public struct ClientError {
 public class NetworkClient<Base: HTTPResponseModel> {
     
     public let sessionManager: Alamofire.SessionManager
-    private let configure: NetworkClientConfig
-    private var requestManager: RequestManager?
+    public var configure: NetworkClientConfig
+    private weak var requestManager: RequestManager?
     private let networkQueue: OperationQueueScheduler
     
     public init(config: NetworkClientConfig) {
@@ -69,7 +66,7 @@ public class NetworkClient<Base: HTTPResponseModel> {
         let queue = OperationQueue()
         queue.name = "com.network.\(config.name)"
         networkQueue =  OperationQueueScheduler(operationQueue: queue)
-    
+        
     }
     
     
@@ -80,12 +77,11 @@ public class NetworkClient<Base: HTTPResponseModel> {
     
     
     // MARK: - Create
-    private func createURLRequest(_ method: HTTPMethod,
-                          _ urlString: String,
-                          parameters: [String: Any]? = nil,
-                          encoding: ParameterEncoding = JSONEncoding.default,
-                          headers: [String: String]? = nil)  -> URLRequest? {
-        guard let url = URL(string: urlString) else { return nil }
+    public func createURLRequest(_ method: HTTPMethod,
+                                 _ url: URL,
+                                 parameters: [String: Any]? = nil,
+                                 encoding: ParameterEncoding = JSONEncoding.default,
+                                 headers: [String: String]? = nil)  -> URLRequest? {
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
         for (headerField, headerValue) in headers ?? [:] {
@@ -100,9 +96,19 @@ public class NetworkClient<Base: HTTPResponseModel> {
     }
     
     
-    private func createURLRequest(type: RequestParameters) -> URLRequest? {
+    public func createURLRequest(type: RequestParameters) -> URLRequest? {
         let entity = type.toRequestEntity()
-        let url = configure.buildURL(version: entity.version, path: entity.url)
+        var urlComponents = URLComponents()
+        urlComponents.scheme = configure.schema
+        urlComponents.host = configure.host
+        urlComponents.path = "/\(entity.version)/\(entity.path)"
+        if !entity.query.isEmpty {
+            var data = [URLQueryItem]()
+            for (k, v) in entity.query {
+                data.append(URLQueryItem(name: k, value: v))
+            }
+            urlComponents.queryItems = data
+        }
         var parameters: [String: Any]? = nil
         if let b = entity.body {
             switch b {
@@ -113,10 +119,8 @@ public class NetworkClient<Base: HTTPResponseModel> {
                 parameters = body.toJSON()
             }
         }
-        guard let req = createURLRequest(entity.method,
-                                         url, parameters: parameters,
-                                         encoding: JSONEncoding.default,
-                                         headers: nil) else { return nil }
+        guard let url = try? urlComponents.asURL(),
+            let req = createURLRequest(entity.method, url, parameters: parameters, encoding: JSONEncoding.default, headers: nil) else { return nil }
         if let m = requestManager {
             return m.configure(request: req)
         } else {
@@ -192,7 +196,7 @@ public class NetworkClient<Base: HTTPResponseModel> {
             .subscribeOn(networkQueue)
             .observeOn(MainScheduler.asyncInstance)
     }
-
+    
     public func netDefaultRequest(_ type: RequestParameters) -> Observable<Any> {
         guard let request = createURLRequest(type: type) else {
             return Observable.error(NSBuildError(code: ClientError.urlError,
@@ -220,7 +224,7 @@ public class NetworkClient<Base: HTTPResponseModel> {
             .subscribeOn(networkQueue)
             .observeOn(MainScheduler.asyncInstance)
     }
-
+    
 }
 
 

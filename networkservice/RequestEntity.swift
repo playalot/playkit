@@ -18,66 +18,102 @@ public enum RequestBody {
     case mapper(body: Mappable)
 }
 
+public protocol URLQueryValue {
+    var urlQueryValue: String { get }
+}
+extension String: URLQueryValue {
+    public var urlQueryValue: String { return self }
+}
+extension Int: URLQueryValue {
+    public var urlQueryValue: String { return self.description }
+}
 
-public struct PLRequestEntity {
+
+public struct RequestEntity {
     
     // 请求类型
     public let method: HTTPMethod
     // 请求路径
-    public let url: String
+    public let path: String
     // 请求版本
-    public var version: String = "v1/"
+    public var version: String = "v1"
     // 请求体
     public var body: RequestBody?
+    /// 查询参数
+    public var query = [String: String]()
     
     
-    public init(GET aUrl: String) {
+    public init(GET aPath: String) {
         method = HTTPMethod.get
-        url = aUrl
+        path = aPath
     }
     
-    public init(POST aUrl: String) {
+    public init(POST aPath: String) {
         method = HTTPMethod.post
-        url = aUrl
+        path = aPath
     }
     
-    public init(DELETE aUrl: String) {
+    public init(DELETE aPath: String) {
         method = HTTPMethod.delete
-        url = aUrl
+        path = aPath
     }
     
-    public init(_ aMethod: HTTPMethod, _ aUrl: String) {
+    public init(_ aMethod: HTTPMethod, _ aPath: String) {
         method = aMethod
-        url = aUrl
+        path = aPath
     }
     
     
-    public func changeVersion(_ ver: String) -> PLRequestEntity {
+    public func changeVersion(_ ver: String) -> RequestEntity {
         var data = self
         data.version = ver
         return data
     }
     
-    public func addMapBody(_ map: Mappable) -> PLRequestEntity {
+    public func addMapBody(_ map: Mappable) -> RequestEntity {
         var data = self
         data.body = RequestBody.mapper(body: map)
         return data
     }
     
-    public func addDictBody(_ dict: [String: Any]) -> PLRequestEntity {
+    public func addDictBody(_ dict: [String: Any]) -> RequestEntity {
         var data = self
         data.body = RequestBody.dict(body: dict)
         return data
     }
+    
+    
+    public func addQuery(_ key: String, value: URLQueryValue?) -> RequestEntity {
+        var data = self
+        if let v = value?.urlQueryValue {
+            data.query[key] = v
+        } else {
+            _ = data.query.removeValue(forKey: key)
+        }
+        return data
+    }
+    
+    public func addQuerys(_ querys: [String: URLQueryValue?]) -> RequestEntity {
+        var data = self
+        for (k, v) in querys {
+            if let _v = v?.urlQueryValue {
+                data.query[k] = _v
+            } else {
+                _ = data.query.removeValue(forKey: k)
+            }
+        }
+        return data
+    }
+    
 }
 
 
 public protocol RequestParameters {
-    func toRequestEntity() -> PLRequestEntity
+    func toRequestEntity() -> RequestEntity
 }
 
 extension RequestParameters {
-    public var request: PLRequestEntity {
+    public var request: RequestEntity {
         return self.toRequestEntity()
     }
 }
