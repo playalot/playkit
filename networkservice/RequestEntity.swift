@@ -12,12 +12,6 @@ import ObjectMapper
 
 public typealias HTTPMethod = Alamofire.HTTPMethod
 
-public enum RequestBody {
-    case none
-    case dict(body: [String: Any])
-    case mapper(body: Mappable)
-}
-
 public protocol URLQueryValue {
     var urlQueryValue: String { get }
 }
@@ -38,7 +32,7 @@ public struct RequestEntity {
     // 请求版本
     public var version: String = "v1"
     // 请求体
-    public var body: RequestBody?
+    public var body: [String: Any]?
     /// 查询参数
     public var query = [String: String]()
     
@@ -70,15 +64,32 @@ public struct RequestEntity {
         return data
     }
     
-    public func addMapBody(_ map: Mappable) -> RequestEntity {
+    public func addMapBody(_ map: Mappable?, forKey key: String? = nil) -> RequestEntity {
+        guard let newBody = map?.toJSON() else { return self}
         var data = self
-        data.body = RequestBody.mapper(body: map)
+        var body = data.body ?? [String: Any]()
+        if let k = key {
+            var dict = [String: Any]()
+            for (k, v) in newBody {
+                dict[k] = v
+            }
+            body[k] = dict
+        } else {
+            for (k, v) in newBody {
+                body[k] = v
+            }
+        }
+        data.body = body
         return data
     }
     
     public func addDictBody(_ dict: [String: Any]) -> RequestEntity {
         var data = self
-        data.body = RequestBody.dict(body: dict)
+        var body = data.body ?? [String: Any]()
+        for (k, v) in dict {
+            body[k] = v
+        }
+        data.body = body
         return data
     }
     
@@ -119,7 +130,7 @@ extension RequestParameters {
 }
 
 public protocol HTTPResponseModel: Mappable {
-    var code: Int { get }
+    var code: Int? { get }
     var message: String? { get }
     var data: Any? { get }
     var isSuccess: Bool { get }

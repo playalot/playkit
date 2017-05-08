@@ -16,11 +16,12 @@ public struct NetworkClientConfig {
     public let name: String
     public var schema: String
     public let host: String
-    
-    public init(name: String, schema: String, host: String) {
+    public var port: Int?
+    public init(name: String, schema: String, host: String, port: Int? = nil) {
         self.name = name
         self.schema = schema
         self.host = host
+        self.port = port
     }
 }
 
@@ -102,25 +103,22 @@ public class NetworkClient<Base: HTTPResponseModel> {
         urlComponents.scheme = configure.schema
         urlComponents.host = configure.host
         urlComponents.path = "/\(entity.version)/\(entity.path)"
+        urlComponents.port = configure.port
         if !entity.query.isEmpty {
             var data = [URLQueryItem]()
             for (k, v) in entity.query {
+                guard !v.isEmpty else { continue }
                 data.append(URLQueryItem(name: k, value: v))
             }
             urlComponents.queryItems = data
         }
-        var parameters: [String: Any]? = nil
-        if let b = entity.body {
-            switch b {
-            case .none: break
-            case .dict(let body):
-                parameters = body
-            case .mapper(let body):
-                parameters = body.toJSON()
-            }
-        }
+        
         guard let url = try? urlComponents.asURL(),
-            let req = createURLRequest(entity.method, url, parameters: parameters, encoding: JSONEncoding.default, headers: nil) else { return nil }
+            let req = createURLRequest(entity.method,
+                                       url,
+                                       parameters: entity.body,
+                                       encoding: JSONEncoding.default,
+                                       headers: nil) else { return nil }
         if let m = requestManager {
             return m.configure(request: req)
         } else {
@@ -174,14 +172,13 @@ public class NetworkClient<Base: HTTPResponseModel> {
                     return Observable.error(NSBuildError(code: ClientError.dataNotFound,
                                                          message: "Data Not Found"))
                 }
-                guard model.code == 1 else {
+                guard HTTPStatusCode(rawValue: response.statusCode)?.isSuccess ?? false, model.isSuccess else {
                     let errorReason = model.message ?? "Status Error"
-                    return Observable.error(NSBuildError(code: model.code, message: errorReason))
+                    return Observable.error(NSBuildError(code: model.code ?? -1, message: errorReason))
                 }
                 // 没有找到有效数据
                 guard let data = model.data else {
-                    return Observable.error(NSBuildError(code: ClientError.dataNotFound,
-                                                         message: "Missing Data"))
+                    return Observable.error(NSBuildError(code: ClientError.dataNotFound, message: "Missing Data"))
                 }
                 // 转换为 Model 失败
                 guard let t = transform(data) else {
@@ -210,7 +207,7 @@ public class NetworkClient<Base: HTTPResponseModel> {
                 guard let model = Mapper<Base>().map(JSONObject: json) else {
                     return Observable.error(NSBuildError(code: ClientError.dataNotFound, message: "Data not found"))
                 }
-                if model.isSuccess {
+                if HTTPStatusCode(rawValue: response.statusCode)?.isSuccess ?? false, model.isSuccess {
                     return Observable.just(json)
                 } else {
                     let errorReason = model.message ?? "Status Error"
